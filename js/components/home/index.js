@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, View, StatusBar } from "react-native";
+import { View, StatusBar } from "react-native";
 
 import { Container, Button, H3, Text, Footer, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
 
@@ -47,6 +47,9 @@ class Home extends Component {
 				</Header>
 				<Content>
 					<Text>{this.state.menuName}</Text>
+					<Text>
+						你好,
+					</Text>
 				</Content>
 				<Footer>
 					<FooterTab>

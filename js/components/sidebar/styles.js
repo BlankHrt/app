@@ -10,6 +10,10 @@ export default {
     flex: 1,
     backgroundColor: "#fff"
   },
+  headText: {
+    color: 'white',
+    zIndex: 999
+  },
   drawerCover: {
     alignSelf: "stretch",
     // resizeMode: 'cover',

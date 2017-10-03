@@ -52,8 +52,8 @@ const datas = [
 		types: "4",
 	},
 	{
-		name: "Badge",
-		route: "NHBadge",
+		name: "退出登录",
+		route: "logout",
 		icon: "notifications",
 		bg: "#4DCAE0",
 	},
@@ -184,22 +184,25 @@ const datas = [
 	},
 ];
 
+
 class SideBar extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			shadowOffsetWidth: 1,
-			shadowRadius: 4,
+
 		};
 	}
+
 
 	render() {
 		return (
 			<Container>
 				<Content bounces={false} style={{ flex: 1, backgroundColor: "#fff", top: -1 }}>
 					<Image source={drawerCover} style={styles.drawerCover}>
-						<Image square style={styles.drawerImage} source={drawerImage} />
+						{/* <Image square style={styles.drawerImage} source={drawerImage} /> */}
+
 					</Image>
+					
 					<List
 						dataArray={datas}
 						renderRow={data =>
