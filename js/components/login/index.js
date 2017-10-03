@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Image, View, StatusBar } from "react-native";
-import PropTypes from 'prop-types';
-GLOBAL = require('../../Globals');
-import { Container, Button, Label, Text, Form, Grid, Item, Col, Input, Content, Icon, Header, Title, Body, Left, Right } from "native-base";
+import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import { Image, View, StatusBar } from "react-native";
+import { Container, Button, Label, Text, Form, Grid, Item, Col, Input, Content, Icon, Header, Title, Body, Left, Right } from "native-base";
 import { isSignedIn } from "../../Auth";
-
+import { userLogin } from "../../reducers/user/userAction"
 import styles from "./styles";
+GLOBAL = require('../../Globals');
 
 class Login extends Component {
     // eslint-disable-line
@@ -63,9 +63,14 @@ class Login extends Component {
                                 token: responseJson.token,
                                 isLogin: true
                             },
-                            expires: 1000 * 60 *10
+                            expires: 1000 * 60 * 10
                         })
-                        this.props.navigation.navigate('Drawer')
+                        this.props.navigation.navigate('Drawer');
+                        this.props.login({
+                            user: responseJson.user,
+                            token: responseJson.token,
+                            isLogin: true
+                        });
                     } else {
                         this.setState({ showError: true })
                     }
@@ -131,4 +136,12 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    user: state
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    login: (data) => dispatch(userLogin(data))
+})
+
+export default Login = connect(mapStateToProps, mapDispatchToProps)(Login);

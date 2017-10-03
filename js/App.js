@@ -2,15 +2,16 @@
 
 import React from "react";
 import Storage from 'react-native-storage';
+import { connect } from 'react-redux'
 import { AsyncStorage } from "react-native";
 import { Platform } from "react-native";
 import { Root } from "native-base";
 import { NavigationActions, StackNavigator } from "react-navigation";
 import { getUser } from "./Auth";
+import { userLogin } from "./reducers/user/userAction"
 
 import Drawer from "./Drawer";
 import Login from "./components/login/index";
-
 
 const AppNavigator = StackNavigator(
     {
@@ -23,7 +24,6 @@ const AppNavigator = StackNavigator(
         headerMode: "none",
     }
 );
-
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -43,17 +43,11 @@ class App extends React.Component {
 
     componentWillMount() {
         getUser()
-            .then(res => res.user)
             .then(res => {
-                this.setState({ user: res })
+                this.props.login(res);
             })
             .catch(err => {
                 console.log(err);
-                this.setState({
-                    user: {
-                        name: null
-                    }
-                })
             })
     }
 
@@ -63,4 +57,12 @@ class App extends React.Component {
         );
     }
 }
-export default App;
+
+const mapStateToProps = state => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    login: (data) => dispatch(userLogin(data))
+})
+export default App = connect(mapStateToProps, mapDispatchToProps)(App);

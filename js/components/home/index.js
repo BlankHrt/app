@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, StatusBar } from "react-native";
-
+import { connect } from 'react-redux'
 import { Container, Button, H3, Text, Footer, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
-
+import { userLogin } from '../../reducers/user/userAction'
 import styles from "./styles";
 
 const launchscreenBg = require("../../../img/launchscreen-bg.png");
@@ -17,6 +17,8 @@ class Home extends Component {
 			menuName: menu[0].name,
 			active: [true, false, false]
 		}
+		console.log('home props-------->')
+		console.log(this.props)
 	}
 
 	onButtonPress(num) {
@@ -28,6 +30,7 @@ class Home extends Component {
 	}
 
 	render() {
+		const { user, isLogin, token } = this.props.user;
 		return (
 			<Container>
 				<StatusBar barStyle="light-content" />
@@ -48,7 +51,7 @@ class Home extends Component {
 				<Content>
 					<Text>{this.state.menuName}</Text>
 					<Text>
-						你好,
+						你好,{user.name}
 					</Text>
 				</Content>
 				<Footer>
@@ -73,5 +76,8 @@ class Home extends Component {
 		);
 	}
 }
+const mapStateToProps = state => ({
+	user: state.userReducer
+})
 
-export default Home;
+export default Home = connect(mapStateToProps)(Home);
