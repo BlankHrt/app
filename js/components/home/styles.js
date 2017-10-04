@@ -22,6 +22,9 @@ export default {
     width: 280,
     height: 100
   },
+  container: {
+    marginTop: Platform.OS === 'ios' ? 20 : 0,
+  },
   text: {
     color: "#D8D8D8",
     bottom: 6,

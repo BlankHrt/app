@@ -1,15 +1,46 @@
 import React, { Component } from "react";
-import { View, StatusBar } from "react-native";
+import { View, StatusBar, ScrollView, SampleText } from "react-native";
 import { connect } from 'react-redux'
-import { Container, Button, H3, Text, Footer, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
-import { userLogin } from '../../reducers/user/userAction'
+import { NavigationActions, TabNavigator } from "react-navigation";
+import { Container, Button, H3, Text, Footer, Image, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
+import { userLogin } from '../../reducers/user/userAction';
+import indexTab from "./index/index";
+import activityTab from "./activity/index";
+import hotTab from "./hot/index";
+
 import styles from "./styles";
 
 const launchscreenBg = require("../../../img/launchscreen-bg.png");
 const launchscreenLogo = require("../../../img/logo-kitchen-sink.png");
-const menu = [{ name: '首页' }, { name: '活动' }, { name: '驿站' }]
 
-class Home extends Component {
+const Home = TabNavigator({
+	index: {
+		screen: indexTab,
+	},
+	activity: {
+		screen: activityTab,
+	},
+	hot: {
+		screen: hotTab,
+	},
+}, {
+		tabBarPosition: 'bottom',
+		animationEnabled: false,
+		initialRouteName: 'index',
+		tabBarOptions: {
+			activeTintColor: '#e91e63',
+			showIcon: false,
+			labelStyle: {
+				fontSize: 18,
+			},
+			style: {
+				// backgroundColor: 'blue',
+			},
+		},
+	});
+
+
+/* class Home extends Component {
 	// eslint-disable-line
 	constructor(props) {
 		super(props);
@@ -75,9 +106,9 @@ class Home extends Component {
 			</Container >
 		);
 	}
-}
+} */
 const mapStateToProps = state => ({
 	user: state.userReducer
 })
 
-export default Home = connect(mapStateToProps)(Home);
+export default Home;
