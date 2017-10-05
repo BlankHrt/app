@@ -221,7 +221,6 @@ class SideBar extends Component {
 
 	render() {
 		const { user, isLogin, token } = this.props.user;
-		console.log(isLogin);
 		return (
 			<Container>
 				<Content bounces={false} style={{ flex: 1, backgroundColor: "#fff", top: -1 }}>
