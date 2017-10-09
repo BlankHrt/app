@@ -3,7 +3,7 @@ import { View, StatusBar, ScrollView, SampleText } from "react-native";
 import { connect } from 'react-redux'
 import { NavigationActions, TabNavigator } from "react-navigation";
 import { Container, Button, H3, Card, Grid, Col, CardItem, Text, Footer, Image, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
-import { userLogin } from '../../../reducers/user/userAction'
+import { userLogin } from '../../../reducers/user/action'
 
 const launchscreenBg = require("../../../../img/launchscreen-bg.png");
 const launchscreenLogo = require("../../../../img/logo-kitchen-sink.png");
@@ -42,31 +42,7 @@ class indexTab extends React.Component {
     render() {
         return (
             <Container>
-                <StatusBar barStyle="light-content" />
-                <Header>
-                    <Left>
-                        <Button
-                            transparent
-                            onPress={() => this.props.navigation.navigate("DrawerOpen")}
-                        >
-                            <Thumbnail small source={launchscreenBg} />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>首页</Title>
-                    </Body>
-                    <Right />
-                </Header>
                 <Content>
-                    {/* <Card>
-                        <CardItem>
-                            <Body>
-                                <Button onPress={this.query}>
-                                    <Text>手机归属地查询 </Text>
-                                </Button>
-                            </Body>
-                        </CardItem>
-                    </Card> */}
                     <Grid style={styles.grid}>
                         <Col style={styles.col}>
                             <Button transparent vertical onPress={this.query}>

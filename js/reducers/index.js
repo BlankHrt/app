@@ -1,8 +1,16 @@
-import { combineReducers } from 'redux'
-import userReducer from './user/userReducer'
+import { combineReducers } from 'redux';
+import { combineEpics } from 'redux-observable';
+// epics 
+import login from './user/epics'
+import { getByPage, onRefresh } from './hot/epics'
 
-const rootReducer = combineReducers({
-    userReducer
+// reducers 
+import userReducer from './user/reducer';
+import hotReducer from './hot/reducer';
+
+export const rootEpic = combineEpics(
+    getByPage, onRefresh
+);
+export const rootReducer = combineReducers({
+    userReducer, hotReducer
 })
-
-export default rootReducer

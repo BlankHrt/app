@@ -8,8 +8,8 @@ import { Platform } from "react-native";
 import { Root } from "native-base";
 import { NavigationActions, StackNavigator } from "react-navigation";
 import { getUser } from "./Auth";
-import { userLogin } from "./reducers/user/userAction"
-
+import { userLogin } from "./reducers/user/action"
+import 'rxjs';
 import Drawer from "./Drawer";
 import Login from "./components/login/index";
 

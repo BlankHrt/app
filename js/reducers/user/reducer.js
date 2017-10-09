@@ -1,6 +1,4 @@
-const USER_UPDATE = 'USER_UPDATE'
-const USER_LOGIN = 'USER_LOGIN'
-const USER_LOGOUT = 'USER_LOGOUT'
+import { USER_LOGIN, USER_LOGOUT, USER_UPDATE } from '../actionType'
 
 const initialState = {
   user: {

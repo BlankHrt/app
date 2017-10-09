@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation'
 import { Image, View, StatusBar } from "react-native";
 import { Container, Button, Label, Text, Form, Grid, Item, Col, Input, Content, Icon, Header, Title, Body, Left, Right } from "native-base";
 import { isSignedIn } from "../../Auth";
-import { userLogin } from "../../reducers/user/userAction"
+import { userLogin } from "../../reducers/user/action"
 import styles from "./styles";
 GLOBAL = require('../../Globals');
 
@@ -63,7 +63,7 @@ class Login extends Component {
                                 token: responseJson.token,
                                 isLogin: true
                             },
-                            expires: 1000 * 60 * 10
+                            expires: 1000 * 60 * 100
                         })
                         this.props.navigation.navigate('Drawer');
                         this.props.login({
