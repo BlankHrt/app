@@ -4,6 +4,8 @@ import { NavigationActions, TabNavigator, StackNavigator } from "react-navigatio
 import { Container, Button, H3, Text, Footer, Image, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
 import indexTab from "./index/index";
 import activityTab from "./activity/index";
+import activityDetail from "./activity/detail/index";
+import activityAdd from "./activity/add/index";
 import hotTab from "./hot/index";
 import hotAdd from "./hot/add/index";
 import hotDetail from "./hot/detail/index";
@@ -59,6 +61,15 @@ const Home = StackNavigator({
 		navigationOptions: {
 			title: '详情',
 		},
+	},
+	activityDetail: {
+		screen: activityDetail,
+		navigationOptions: {
+			title: '活动详情',
+		},
+	},
+	activityAdd: {
+		screen: activityAdd,
 	}
 });
 export default Home;
