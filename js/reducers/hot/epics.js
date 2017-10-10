@@ -2,37 +2,10 @@ import { Observable } from 'rxjs/Observable';
 import {
   HOT_GETBYPAGE, HOT_GETBYPAGE_SUCCESS, HOT_GETBYPAGE_FALIED,
   HOT_ONREFRESH, HOT_ONREFRESH_SUCCESS, HOT_ONREFRESH_FAILED,
-  HOT_GETBYID,
-  HOT_SUPPORT,
-  HOT_UNSUPPORT
+  HOT_SUPPORT, HOT_SUPPORT_SUCCESS, HOT_SUPPORT_FAILED,
+  HOT_UNSUPPORT, HOT_UNSUPPORT_SUCCESS, HOT_UNSUPPORT_FAILED
 } from '../actionType'
 import { ActionsObservable } from 'redux-observable';
-
-const api = {
-  getByPage: action => {
-    const request = fetch(GLOBAL.BASE_URL + '/article/getArticleByPage', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Accept': 'application/json, text/plain, */*'
-      },
-      body: action.data
-    })
-      .catch(error => {
-        alert(error);
-        return {
-          type: HOT_GETBYPAGE_FALIED
-        }
-      }).then(response =>
-        response.text().then(function (text) {
-          return text ? JSON.parse(text) : []
-        }))
-      .catch(error => Observable.of({
-        type: HOT_ONREFRESH_FAILED
-      }))
-    return Observable.from(request);
-  }
-};
 
 export const getByPage = (action$, store) => {
   return action$.ofType(HOT_GETBYPAGE)
@@ -95,7 +68,36 @@ export const onRefresh = (action$, store) => {
     );
 }
 
-
+export const support = (action$, store) => {
+  return action$.ofType(HOT_SUPPORT)
+    .switchMap(({ data }) =>
+      Observable
+        .fromPromise(fetch(GLOBAL.BASE_URL + '/article/support', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Accept': 'application/json, text/plain, */*'
+          },
+          body: data.uri
+        }).then(response =>
+          response.text().then(function (text) {
+            return text ? JSON.parse(text) : []
+          })
+          ))
+        .map(payload => {
+          if (payload.error) {
+            console.log(payload)
+            return {
+              type: HOT_SUPPORT_FAILED
+            }
+          }
+          return {
+            type: HOT_SUPPORT_SUCCESS,
+            payload: data
+          }
+        })
+    );
+}
 
 
 

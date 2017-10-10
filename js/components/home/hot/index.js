@@ -45,14 +45,17 @@ class HotTab extends React.Component {
 
     support(hot, index) {
         if (this.props.isLogin) {
-            this.setState((prevState, props) => ({
+           /*  this.setState((prevState, props) => ({
                 hotList: [
                     ...prevState.hotList.slice(0, index),
                     { ...hot, supportNumber: hot.supportNumber++ },
                     ...prevState.hotList.slice(index + 1),
                 ],
-            }));
-            let body = `id=${hot.id}&userID=${this.props.user.id}`;
+            })); */
+            let uri = `id=${hot.id}&userID=${this.props.user.id}`;
+            this.props.support({
+                hot, index, uri
+            });
         } else {
             Alert.alert(
                 '您尚未登录',
@@ -186,5 +189,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
     getByPage: (data) => dispatch({ type: 'HOT_GETBYPAGE', data }),
     onRefresh: (data) => dispatch({ type: 'HOT_ONREFRESH', data }),
+    support: (data) => dispatch({ type: 'HOT_SUPPORT', data }),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(HotTab);
