@@ -160,7 +160,7 @@ class HotTab extends React.Component {
                     containerStyle={{}}
                     style={{ backgroundColor: '#5067FF' }}
                     position="bottomRight"
-                    onPress={() => this.state.isLogin ? this.props.navigation.navigate('hotAdd') :
+                    onPress={() => this.props.isLogin ? this.props.navigation.navigate('hotAdd') :
                         Alert.alert(
                             '您尚未登录',
                             '是否跳转登录页面',
