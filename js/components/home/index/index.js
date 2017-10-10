@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StatusBar, ScrollView, SampleText } from "react-native";
+import { StyleSheet,View, StatusBar, ScrollView, SampleText, ActivityIndicator,  ListView } from "react-native";
 import { connect } from 'react-redux'
 import { NavigationActions, TabNavigator } from "react-navigation";
 import { Container, Button, H3, Card, Grid, Col, CardItem, Text, Footer, Image, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
@@ -11,6 +11,9 @@ GLOBAL = require('../../../Globals');
 import styles from "./styles";
 
 class indexTab extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     static navigationOptions = {
         tabBarLabel: '首页',
         // Note: By default the icon is only shown on iOS. Search the showIcon option below.
@@ -30,14 +33,6 @@ class indexTab extends React.Component {
                 console.log(data);
             })
     }
-    query() {
-        alert(1);
-    }
-    handleRes(response) {
-        return response.text().then(function (text) {
-            return text ? JSON.parse(text) : {}
-        })
-    }
 
     render() {
         return (
@@ -47,32 +42,32 @@ class indexTab extends React.Component {
                         <Col style={styles.col}>
                             <Button transparent vertical onPress={this.query}>
                                 <Icon name='home' />
-                                <Text>Apps</Text>
+                                <Text>教务</Text>
                             </Button>
                         </Col>
                         <Col style={styles.col}>
                             <Button transparent vertical onPress={this.query}>
                                 <Icon name='camera' />
-                                <Text>Apps</Text>
+                                <Text>快递</Text>
                             </Button>
                         </Col>
                         <Col style={styles.col}>
                             <Button transparent vertical onPress={this.query}>
                                 <Icon name='bicycle' />
-                                <Text>Apps</Text>
+                                <Text>教材</Text>
                             </Button>
                         </Col>
                         <Col style={styles.col}>
                             <Button transparent vertical onPress={this.query}>
                                 <Icon name='logo-apple' />
-                                <Text>Apps</Text>
+                                <Text>交友</Text>
                             </Button>
                         </Col>
                     </Grid>
                 </Content>
-
-            </Container >
+              
+            </Container>
         );
     }
-}
+  }
 export default indexTab;
