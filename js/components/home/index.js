@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { View, StatusBar, ScrollView, SampleText } from "react-native";
 import { NavigationActions, TabNavigator, StackNavigator } from "react-navigation";
 import { Container, Button, H3, Text, Footer, Image, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
-import { userLogin } from '../../reducers/user/action';
 import indexTab from "./index/index";
 import activityTab from "./activity/index";
 import hotTab from "./hot/index";

@@ -5,6 +5,7 @@ import { NavigationActions, TabNavigator } from "react-navigation";
 import { Container, Fab, Button, Spinner, List, ListItem, H3, Input, Text, Item, Footer, Image, Thumbnail, Content, Icon, Header, CardItem, Card, Tabs, Tab, Title, Body, Left, Right } from "native-base";
 const defaultHeadUrl = require("../../../../img/drawer-cover.png");
 import TimeAgo from '../../../util/TimeAgo';
+import { getUser } from "../../../Auth";
 
 import styles from "./styles";
 
@@ -23,10 +24,16 @@ class HotTab extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
-        this.getHot(this.state.startPage, 5, this.props.isLogin, this.props.user.id)
+        getUser().then(res => {
+            if (res.isLogin) {
+                this.getHot(this.state.startPage, 5, res.isLogin, res.user.id)
+            } else {
+                this.getHot(this.state.startPage, 5, false, null)
+            }
+        }).catch(err => {
+            this.getHot(this.state.startPage, 5, false, null)
+        })
     }
-
     onRefresh() {
         let body = `startPage=${1}&articleType=${5}&isLogin=${this.props.isLogin}&userID=${this.props.user.id}`;
         this.props.onRefresh(body);
@@ -45,13 +52,6 @@ class HotTab extends React.Component {
 
     support(hot, index) {
         if (this.props.isLogin) {
-           /*  this.setState((prevState, props) => ({
-                hotList: [
-                    ...prevState.hotList.slice(0, index),
-                    { ...hot, supportNumber: hot.supportNumber++ },
-                    ...prevState.hotList.slice(index + 1),
-                ],
-            })); */
             let uri = `id=${hot.id}&userID=${this.props.user.id}`;
             this.props.support({
                 hot, index, uri

@@ -3,11 +3,9 @@ import { View, TextInput } from "react-native";
 import { connect } from 'react-redux'
 import { NavigationActions, TabNavigator } from "react-navigation";
 import { Container, Button, Label, Item, Input, Text, Image, Content, Icon, Header, Title, Body, Left, Right } from "native-base";
-import { userLogin } from '../../../../reducers/user/action'
 
 class HotAdd extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        console.log(navigation)
         const { state } = navigation;
         return {
             headerRight: state.params && state.params.renderHeaderRight

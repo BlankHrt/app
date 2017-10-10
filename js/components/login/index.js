@@ -4,7 +4,6 @@ import { NavigationActions } from 'react-navigation'
 import { Image, View, StatusBar } from "react-native";
 import { Container, Button, Label, Text, Form, Grid, Item, Col, Input, Content, Icon, Header, Title, Body, Left, Right } from "native-base";
 import { isSignedIn } from "../../Auth";
-import { userLogin } from "../../reducers/user/action"
 import styles from "./styles";
 GLOBAL = require('../../Globals');
 
@@ -43,48 +42,49 @@ class Login extends Component {
     login() {
         if (this.state.phone && this.state.password) {
             let body = 'username=' + this.state.phone + '&password=' + this.state.password
-            fetch(GLOBAL.BASE_URL + '/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                    'Accept': 'application/json, text/plain, */*'
-                },
-                body: body
-            })
-                .then(this.handleRes)
-                .then((responseJson) => {
-                    if (responseJson.user && responseJson.user.id) {
-                        this.setState({ showError: false })
-                        global.storage.save({
-                            key: 'loginState',  // 注意:请不要在key中使用_下划线符号!
-                            id: '1000',   // 注意:请不要在id中使用_下划线符号!
-                            data: {
-                                user: responseJson.user,
-                                token: responseJson.token,
-                                isLogin: true
-                            },
-                            expires: 1000 * 60 * 100
-                        })
-                        this.props.navigation.navigate('Drawer');
-                        this.props.login({
-                            user: responseJson.user,
-                            token: responseJson.token,
-                            isLogin: true
-                        });
-                    } else {
-                        this.setState({ showError: true })
-                    }
-                })
-                .catch((error) => {
-                    console.error(error);
-                })
+            this.props.login(body);
+            // fetch(GLOBAL.BASE_URL + '/auth/login', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            //         'Accept': 'application/json, text/plain, */*'
+            //     },
+            //     body: body
+            // })
+            //     .then(this.handleRes)
+            //     .then((responseJson) => {
+            //         if (responseJson.user && responseJson.user.id) {
+            //             this.setState({ showError: false })
+            //             global.storage.save({
+            //                 key: 'loginState',  // 注意:请不要在key中使用_下划线符号!
+            //                 id: '1000',   // 注意:请不要在id中使用_下划线符号!
+            //                 data: {
+            //                     user: responseJson.user,
+            //                     token: responseJson.token,
+            //                     isLogin: true
+            //                 },
+            //                 expires: 1000 * 60 * 100
+            //             })
+            //             this.props.navigation.navigate('Drawer');
+            //             this.props.loginSuccess({
+            //                 user: responseJson.user,
+            //                 token: responseJson.token,
+            //                 isLogin: true
+            //             });
+            //         } else {
+            //             this.setState({ showError: true })
+            //         }
+            //     })
+            //     .catch((error) => {
+            //         console.error(error);
+            //     })
         }
     }
 
-    handleRes(response) {
-        return response.text().then(function (text) {
-            return text ? JSON.parse(text) : {}
-        })
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isLogin) {
+            nextProps.navigation.navigate('Drawer')
+        }
     }
 
     render() {
@@ -110,12 +110,12 @@ class Login extends Component {
                             <Input value={this.state.password} onChangeText={(e) => this.validatePassword(e)} secureTextEntry={true} />
                         </Item>
                         {
-                            this.state.showError ?
-                                <Item>
-                                    <Text style={styles.error}>
-                                        用户名密码错误
+                            this.props.checkLoginError &&
+                            <Item>
+                                <Text style={styles.error}>
+                                    用户名密码错误
                                     </Text>
-                                </Item> : null
+                            </Item>
                         }
 
                     </Form>
@@ -137,11 +137,12 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: state
+    checkLoginError: state.userReducer.checkLoginError,
+    isLogin: state.userReducer.isLogin,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    login: (data) => dispatch(userLogin(data))
+    login: (payload) => dispatch({ type: 'USER_LOGIN', payload })
 })
 
 export default Login = connect(mapStateToProps, mapDispatchToProps)(Login);

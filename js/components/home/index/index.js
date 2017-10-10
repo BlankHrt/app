@@ -3,7 +3,6 @@ import { View, StatusBar, ScrollView, SampleText } from "react-native";
 import { connect } from 'react-redux'
 import { NavigationActions, TabNavigator } from "react-navigation";
 import { Container, Button, H3, Card, Grid, Col, CardItem, Text, Footer, Image, Thumbnail, FooterTab, Content, Badge, Icon, Header, Tabs, Tab, Title, Body, Left, Right } from "native-base";
-import { userLogin } from '../../../reducers/user/action'
 
 const launchscreenBg = require("../../../../img/launchscreen-bg.png");
 const launchscreenLogo = require("../../../../img/logo-kitchen-sink.png");

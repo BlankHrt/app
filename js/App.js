@@ -8,7 +8,6 @@ import { Platform } from "react-native";
 import { Root } from "native-base";
 import { NavigationActions, StackNavigator } from "react-navigation";
 import { getUser } from "./Auth";
-import { userLogin } from "./reducers/user/action"
 import 'rxjs';
 import Drawer from "./Drawer";
 import Login from "./components/login/index";
@@ -44,7 +43,9 @@ class App extends React.Component {
     componentWillMount() {
         getUser()
             .then(res => {
-                this.props.login(res);
+                if (res.isLogin) {
+                    this.props.loginSuccess(res)
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -63,6 +64,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    login: (data) => dispatch(userLogin(data))
+    login: (payload) => dispatch({ type: 'USER_LOGIN', payload }),
+    loginSuccess: (payload) => dispatch({ type: 'USER_LOGIN_SUCCESS', payload }),
 })
 export default App = connect(mapStateToProps, mapDispatchToProps)(App);

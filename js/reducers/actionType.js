@@ -1,8 +1,22 @@
 module.exports = {
-    // user
+    /* 
+        user
+     */
+
+    // update
     USER_UPDATE: 'USER_UPDATE',
+    USER_UPDATE_SUCCESS: 'USER_UPDATE_SUCCESS',
+    USER_UPDATE_FAILED: 'USER_UPDATE_FAILED',
+
+    //login
     USER_LOGIN: 'USER_LOGIN',
+    USER_LOGIN_SUCCESS: 'USER_LOGIN_SUCCESS',
+    USER_LOGIN_FAILED: 'USER_LOGIN_FAILED',
+
+    //logout
     USER_LOGOUT: 'USER_LOGOUT',
+    USER_LOGOUT_SUCCESS: 'USER_LOGOUT_SUCCESS',
+    USER_LOGOUT_FAILED: 'USER_LOGOUT_FAILED',
 
     /* 
        hot 

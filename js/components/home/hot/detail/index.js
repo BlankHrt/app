@@ -3,7 +3,6 @@ import { View, StatusBar } from "react-native";
 import { connect } from 'react-redux'
 import { NavigationActions, TabNavigator } from "react-navigation";
 import { Container, Fab, Button, List, ListItem, H3, Input, Text, Item, Footer, Image, Thumbnail, Content, Icon, Header, CardItem, Card, Tabs, Tab, Title, Body, Left, Right } from "native-base";
-import { userLogin } from '../../../../reducers/user/action'
 
 class HotDetail extends React.Component {
     constructor(props) {
