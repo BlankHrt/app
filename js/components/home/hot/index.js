@@ -6,14 +6,22 @@ import { Container, Fab, Button, Spinner, List, ListItem, H3, Input, Text, Item,
 const defaultHeadUrl = require("../../../../img/drawer-cover.png");
 import TimeAgo from '../../../util/TimeAgo';
 import { getUser } from "../../../Auth";
-
 import styles from "./styles";
 
-class HotTab extends React.Component {
-    static navigationOptions = {
-        tabBarLabel: '七号驿站',
-    };
+const launchscreenBg = require('../../../../img/logo.png')
 
+class HotTab extends React.Component {
+    static navigationOptions = ({ navigation }) => {
+        const { state } = navigation;
+        return {
+            tabBarLabel: '七号驿站',
+            headerLeft: (
+                <Button transparent onPress={() => navigation.navigate("DrawerOpen")}>
+                    <Thumbnail small source={launchscreenBg} />
+                </Button>
+            )
+        }
+    };
     constructor(props) {
         super(props);
         this.state = {
