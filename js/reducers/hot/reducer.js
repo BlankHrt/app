@@ -11,8 +11,7 @@ export default function hotReducer(state = {
   switch (action.type) {
     case HOT_GETBYPAGE:
       return {
-        hotList: [],
-        isFetching: true
+        ...state
       }
     case HOT_GETBYPAGE_SUCCESS:
     case HOT_ONREFRESH_SUCCESS:
@@ -34,7 +33,7 @@ export default function hotReducer(state = {
         ...state,
         hotList: [
           ...state.hotList.slice(0, action.payload.index),
-          { ...action.payload.hot, supportNumber: action.payload.hot.supportNumber++ },
+          { ...action.payload.hot, supportNumber: action.payload.hot.supportNumber+1 },
           ...state.hotList.slice(action.payload.index + 1),
         ]
       }
