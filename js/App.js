@@ -3,26 +3,12 @@
 import React from "react";
 import Storage from 'react-native-storage';
 import { connect } from 'react-redux'
-import { AsyncStorage } from "react-native";
-import { Platform } from "react-native";
-import { Root } from "native-base";
+import { AsyncStorage, Platform } from "react-native";
 import { NavigationActions, StackNavigator } from "react-navigation";
 import { getUser } from "./Auth";
 import 'rxjs';
-import Drawer from "./Drawer";
-import Login from "./components/login/index";
+import Home from "./components/index";
 
-const AppNavigator = StackNavigator(
-    {
-        Drawer: { screen: Drawer },
-        Login: { screen: Login },
-
-    },
-    {
-        initialRouteName: "Drawer",
-        headerMode: "none",
-    }
-);
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -54,7 +40,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <AppNavigator />
+            <Home />
         );
     }
 }

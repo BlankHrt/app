@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
-import { Image, View, StatusBar } from "react-native";
-import { Container, Button, Label, Text, Form, Grid, Item, Col, Input, Content, Icon, Header, Title, Body, Left, Right } from "native-base";
+import { Image, View, StatusBar, Text } from "react-native";
 import { isSignedIn } from "../../Auth";
 import styles from "./styles";
 GLOBAL = require('../../Globals');
@@ -89,49 +88,9 @@ class Login extends Component {
 
     render() {
         return (
-            <Container>
-                <Header>
-                    <Left />
-                    <Body>
-                        <Title>登录</Title>
-                    </Body>
-                    <Right />
-                </Header>
-                <Content>
-                    <Form style={{ margin: 15, marginTop: 50 }}>
-                        <Item inlineLabel success={true} error={false} >
-                            <Label>手机号:</Label>
-                            <Input value={this.state.phone} keyboardType="numeric" onChangeText={(e) => this.validatePhone(e)} maxLength={11} />
-                            <Icon name='checkmark-circle' />
-                            <Icon name='close-circle' />
-                        </Item>
-                        <Item inlineLabel last>
-                            <Label>密    码:</Label>
-                            <Input value={this.state.password} onChangeText={(e) => this.validatePassword(e)} secureTextEntry={true} />
-                        </Item>
-                        {
-                            this.props.checkLoginError &&
-                            <Item>
-                                <Text style={styles.error}>
-                                    用户名密码错误
-                                    </Text>
-                            </Item>
-                        }
-
-                    </Form>
-                    <Button block style={styles.button} onPress={() => this.login()}>
-                        <Text>登录</Text>
-                    </Button>
-                    <Grid style={styles.grid}>
-                        <Col style={styles.forgetPass}>
-                            <Text>忘记密码?</Text>
-                        </Col>
-                        <Col style={styles.register}>
-                            <Text>新用户注册</Text>
-                        </Col>
-                    </Grid>
-                </Content>
-            </Container >
+            <View>
+                <Text> qwe</Text>
+            </View>
         );
     }
 }
